@@ -9,20 +9,21 @@ use Illuminate\Http\Request;
 class ProjectController extends Controller
 {
     public function index(){
-        $dati = Project::all();
+        $projects = Project::all();
 
-        return view("admin.project.index", compact($dati));
+        return view("admin.projects.index", compact('projects'));
     }
 
     public function show($id){
-        $dati = Project::findOrFail($id);
+        $show_project = Project::findOrFail($id);
 
-        return view("admin.project.show", compact($dati))
-
+        return view("admin.projects.show", compact($show_project));
 
     }
 
     public function create(){
+        return view("admin.projects.create");
+
 
     }
 
