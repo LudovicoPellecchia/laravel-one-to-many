@@ -42,6 +42,15 @@ class ProjectController extends Controller
         return redirect()->route("admin.projects.show", $newProject->slug);
     }
 
+
+    public function edit($slug){
+        $project = Project::where("slug", $slug)->firstOrFail();
+
+        //ritorno la view con il form per modificare i dati del singolo progetto
+        return view('admin.projects.edit', compact('project'));
+
+    }
+
     public function update(StoreProjectRequest $request, $slug){
         //recupero i dati aggiornati dall'edit e validati dal FormRequest
         $data = $request->validated();
@@ -57,8 +66,20 @@ class ProjectController extends Controller
         //aggiorno e salvo i nuovi dati nel database
         $project->update($data);
 
-        return redirect()->route("admin.posts.show", $project->slug);
+        return redirect()->route("admin.projects.show", $project->slug);
 
+
+    }
+
+    protected function destroy($slug){
+        //recupero dal db il progetto con quel determinato slug
+        $project = Project::where("slug", $slug)->firstOrFail();
+
+        //lo elimino
+        $project->delete();
+
+        //redirect all'index con la lista dei progetti
+        return redirect()->route("admin.projects.index");
 
     }
 
