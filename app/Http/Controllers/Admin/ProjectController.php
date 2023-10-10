@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProjectRequest;
+use App\Http\Requests\UpdateProjectRequest;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -56,7 +57,7 @@ class ProjectController extends Controller
 
     }
 
-    public function update(StoreProjectRequest $request, $slug){
+    public function update(UpdateProjectRequest $request, $slug){
         //recupero i dati aggiornati dall'edit e validati dal FormRequest
         $data = $request->validated();
 
@@ -68,8 +69,14 @@ class ProjectController extends Controller
             $data["slug"] = $this->generateSlug($data["titolo"]);
         }
 
-        //prende file img dal frontend, lo rinomina e lo salva in una cartella nello storage
-        $data["immagine"] = Storage::put("projects", $data["immagine"]);
+        //se la request al FormRequest ha un file immagine, prende file img dal frontend, lo rinomina e lo salva in una cartella nello storage
+        if ($request->hasFile('immagine')) {
+            $data["immagine"] = Storage::put("projects", $data["immagine"]);
+
+        }
+
+        //elimino la precedente immagine dal db
+        Storage::delete($project->immagine);
 
         //aggiorno e salvo i nuovi dati nel database
         $project->update($data);
