@@ -3,7 +3,7 @@
 @section("content")
 
 <div class="container">
-    <form action="{{route('admin.projects.update', $project->slug )}}" method="POST" class="mt-5">
+    <form action="{{route('admin.projects.update', $project->slug )}}" method="POST" class="mt-5" enctype="multipart/form-data">
         @csrf()
         @method("PATCH")
 
@@ -14,7 +14,7 @@
 
         <div class="mb-3">
             <label class="form-label mb-1">Immagine </label>
-            <input type="text" class="form-control" name="immagine" value="{{$project->immagine}}">
+            <input type="file" class="form-control" name="immagine">
         </div>
 
         <div class="mb-3">

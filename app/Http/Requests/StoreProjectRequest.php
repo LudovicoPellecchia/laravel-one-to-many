@@ -33,7 +33,7 @@ class StoreProjectRequest extends FormRequest
             "titolo"=>"required",
             "descrizione"=>"required",
             "link_github"=>"nullable",
-            "immagine"=>"required",
+            "immagine"=>"required|image",
             //
         ];
     }

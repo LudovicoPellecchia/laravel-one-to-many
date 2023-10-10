@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProjectRequest;
 use App\Models\Project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class ProjectController extends Controller
@@ -36,6 +37,10 @@ class ProjectController extends Controller
         //genero uno slug unico per la nuova istanza
         $data["slug"] = $this->generateSlug($data["titolo"]);
 
+        //prende file img dal frontend, lo rinomina e lo salva in una cartella nello storage
+        $data["immagine"] = Storage::put("projects", $data["immagine"]);
+
+
         //eseguo fill dei campi dell'istanza (è necessaria la variabile fillable nel Model con tutti i campi), e la salvo nel db
         $newProject = Project::create($data);
 
@@ -62,6 +67,9 @@ class ProjectController extends Controller
         if ($data["titolo"] !== $project->titolo) {
             $data["slug"] = $this->generateSlug($data["titolo"]);
         }
+
+        //prende file img dal frontend, lo rinomina e lo salva in una cartella nello storage
+        $data["immagine"] = Storage::put("projects", $data["immagine"]);
 
         //aggiorno e salvo i nuovi dati nel database
         $project->update($data);

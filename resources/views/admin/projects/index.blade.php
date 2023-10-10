@@ -13,7 +13,7 @@
         @foreach ($projects as $singleProject )
         <div class="col">
             <div class="card my-card">
-                <img src="{{$singleProject->immagine}}" class="card-img-top">
+                <img src={{asset('/storage/' . $singleProject->immagine)}} class="card-img-top">
                 <div class="card-body">
                     <h5 class="card-title">{{$singleProject->titolo}}</h5>
                     <p class="card-text">{{substr($singleProject->descrizione, 0, 150)}}...</p>
@@ -30,8 +30,9 @@
                     More</a>
             </div>
         </div>
+        @endforeach
+
     </div>
-    @endforeach
 </div>
 
 @endsection
