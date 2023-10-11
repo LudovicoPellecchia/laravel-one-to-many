@@ -16,4 +16,9 @@ class Project extends Model
         'link_github',
         'slug',
     ];
+
+    public function types(){
+        return $this->hasMany(Type::class);
+    }
+
 }

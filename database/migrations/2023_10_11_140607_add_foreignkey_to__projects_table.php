@@ -12,11 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('projects', function (Blueprint $table) {
-            $table->unsignedBigInteger('project_id')->nullable();
+            $table->unsignedBigInteger('type_id')->nullable();
 
-            $table->foreign('project_id') // rendo la colonna project_id una foreign key
+            $table->foreign('type_id') // rendo la colonna project_id una foreign key
             ->references('id') // che fa riferimento alla colonna id
-            ->on("projects"); // della tabella users
+            ->on("types"); // della tabella users
             // se l'utente viene cancellato, cancella anche i suoi post
         });
     }
@@ -27,7 +27,8 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('projects', function (Blueprint $table) {
-
+            $table->dropForeign('projects_type_id_foreign');
+            $table->dropColumn('type_id');
         });
     }
 };
