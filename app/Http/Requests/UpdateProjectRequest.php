@@ -32,7 +32,7 @@ class UpdateProjectRequest extends FormRequest
         return [
             "titolo"=>"required",
             "descrizione"=>"required",
-            "link_github"=>"nullable",
+            "link_github"=>"nullable|link",
             "immagine"=>"nullable",
             //
         ];

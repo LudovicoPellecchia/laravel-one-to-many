@@ -12,20 +12,29 @@
     <div class="row row-cols-4 gy-4 mt-4">
         @foreach ($projects as $singleProject )
         <div class="col">
-            <div class="card my-card">
+            <div class="card my-card h-100">
                 <img src={{asset('/storage/' . $singleProject->immagine)}} class="card-img-top">
                 <div class="card-body">
                     <h5 class="card-title">{{$singleProject->titolo}}</h5>
                     <p class="card-text">{{substr($singleProject->descrizione, 0, 150)}}...</p>
                     <h5 class="text-center">{{$singleProject->link_github}}</h5>
 
-                    <form action="{{route('admin.projects.destroy', $singleProject->slug)}}" method="POST">
-                        @csrf()
-                        @method("DELETE")
+                    <div class="d-flex justify-content-between">
+                        <div><a href="{{route("admin.projects.edit", $singleProject->slug)}}">
+                            <button
+                                    class="btn btn-warning">Modifica
+                            </button>
+                            </a>
+                        </div>
+                        <form action="{{route('admin.projects.destroy', $singleProject->slug)}}" method="POST">
+                            @csrf()
+                            @method("DELETE")
 
-                        <button class="btn btn-danger">Elimina</button>
-                    </form>
+                            <button class="btn btn-danger">Elimina</button>
+                        </form>
 
+
+                    </div>
                 </div><a href="{{route('admin.projects.show', $singleProject->slug)}}" class="btn btn-primary">View
                     More</a>
             </div>

@@ -90,6 +90,11 @@ class ProjectController extends Controller
         //recupero dal db il progetto con quel determinato slug
         $project = Project::where("slug", $slug)->firstOrFail();
 
+        //elimino la immagine dal db se presente
+        if ($project->immagine) {
+            Storage::delete($project->immagine);
+        }
+
         //lo elimino
         $project->delete();
 

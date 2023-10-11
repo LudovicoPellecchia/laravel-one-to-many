@@ -32,7 +32,7 @@ class StoreProjectRequest extends FormRequest
         return [
             "titolo"=>"required",
             "descrizione"=>"required",
-            "link_github"=>"nullable",
+            "link_github"=>"nullable|URL",
             "immagine"=>"required|image",
             //
         ];
