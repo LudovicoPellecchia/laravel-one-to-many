@@ -18,6 +18,7 @@
                     <h5 class="card-title">{{$singleProject->titolo}}</h5>
                     <p class="card-text">{{substr($singleProject->descrizione, 0, 150)}}...</p>
                     <h5 class="text-center">{{$singleProject->link_github}}</h5>
+                    <h6>{{$singleProject->type->name}}</h6>
 
                     <div class="d-flex justify-content-between">
                         <div><a href="{{route("admin.projects.edit", $singleProject->slug)}}">

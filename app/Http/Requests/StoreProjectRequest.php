@@ -34,6 +34,7 @@ class StoreProjectRequest extends FormRequest
             "descrizione"=>"required",
             "link_github"=>"nullable|URL",
             "immagine"=>"required|image",
+            "type_id"=>"nullable"
             //
         ];
     }

@@ -9,6 +9,7 @@
         <div class="card-body">
             <h5 class="card-title">{{$show_project->titolo}}</h5>
             <p class="card-text">{{$show_project->descrizione}}</p>
+            <p class="card-text">{{$show_project->type->name}}</p>
             <div class="text-end fs-4"><a href="{{route('admin.projects.edit', $show_project->slug)}}">Modifica</a></div>
 
             <form action="{{route('admin.projects.destroy', $show_project->slug)}}" method="POST">

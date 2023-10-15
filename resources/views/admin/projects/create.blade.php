@@ -18,7 +18,19 @@
 
         <div class="mb-3">
             <label class="form-label mb-1">Descrizione </label>
-            <textarea type="text" class="form-control" name="descrizione" placeholder="Inserisci una descrizione"></textarea>
+            <textarea type="text" class="form-control" name="descrizione"
+                placeholder="Inserisci una descrizione"></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label mb-1">Seleziona un Tipo </label>
+            <select type="text" class="form-control" name="type_id">
+
+                @foreach ($types as $type)
+                    <option value="{{ $type->id }}">{{$type->name}}</option>
+                @endforeach
+
+            </select>
         </div>
 
         <div class="mb-3">
